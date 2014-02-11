@@ -1,9 +1,12 @@
 <?php
-// for debugging
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', '1');
-
-$headers = array("Expires" => "-1", "Content-Type" => "text/html; charset=UTF-8", "Content-Security-Policy" => "default-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'", "X-Frame-Options" => "DENY", "X-Content-Type-Options" => "nosniff", "X-XSS-Protection" => "1; mode=block");
+$headers = array(
+  "Expires" => "-1",
+  "Content-Type" => "text/html; charset=UTF-8",
+  "Content-Security-Policy" => "default-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'",
+  "X-Frame-Options" => "DENY",
+  "X-Content-Type-Options" => "nosniff",
+  "X-XSS-Protection" => "1; mode=block"
+);
 foreach ($headers as $key => $value)
   header("{$key}: {$value}");
 ?>
