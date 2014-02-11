@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 16px;
+  font-family: monospace;
+}
+
+div#wrap {
+  padding: 30px;
+  text-align: center;
+}
+
+div.time_rest {
+  font-size: 50px;
+}
+
+span.time_rest {
+  font-size: 200px;
+}
+
+span#presenter {
+  font-size: 50px;
+  color: #DD0000;
+}
+
+form.controll label {
+  line-height: 2em;
+}
+
+form.controll input[type=text] {
+  text-align: center;
+}
