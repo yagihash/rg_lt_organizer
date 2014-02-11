@@ -26,13 +26,13 @@ foreach ($headers as $key => $value)
       <div class="time_rest">
         <span id="presenter"></span>さんが話しています
         <br />
-        <span class="time_rest">05'00"</span>
+        <span class="time_rest">05:00</span>
       </div>
       <div class="controll">
         <form class="controll">
-          <label>ログイン名を入力して送信
+          <label>名前を入力して送信
             <br />
-            <input type="text" id="login_name" placeholder="ログイン名" pattern="^[A-Za-z0-9]{1,10}$" maxlength="10" size="10" autofocus required />
+            <input type="text" id="login_name" placeholder="name" maxlength="10" size="10" autofocus required />
           </label>
         </form>
       </div>
