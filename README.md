@@ -1,4 +1,4 @@
-rg_system
+rg_lt_organizer
 =========
 
-RG関係の諸々in2014s
+2014s RG Lightning Talk Organizer
