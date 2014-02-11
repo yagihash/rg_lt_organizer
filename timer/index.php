@@ -26,7 +26,7 @@ foreach ($headers as $key => $value)
       <div class="time_rest">
         <span id="presenter"></span>さんが話しています
         <br />
-        <span class="time_rest">05:00</span>
+        <span class="time_rest">--:--</span>
       </div>
       <div class="controll">
         <form class="controll">

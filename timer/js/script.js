@@ -1,5 +1,13 @@
 $(function() {
-  // TODO: 時間設定追加
+  var q = search2obj(location.search);
+  if (q["m"])
+    var time = q["m"];
+  else if (q["s"])
+    var time = sec2min(q["s"]);
+  else
+    var time = "05:00";
+  $("span.time_rest").text(time);
+
   // TODO: 質疑応答モード追加
 
   var loop;
@@ -9,7 +17,7 @@ $(function() {
     var loginName = $("input#login_name").val();
     $("input#login_name").val("");
     $("span#presenter").text(loginName);
-    loop = startTimer();
+    loop = startTimer(time);
     return false;
   });
 
@@ -33,18 +41,19 @@ $(function() {
     $("span.time_rest").text(min);
     var loop = setInterval(function() {
       $("span.time_rest").text(sec2min(--sec));
+      if (sec <= 60) {
+        $("span.time_rest").css("color", "#DD0000");
+      }
       if (sec == 0) {
         clearInterval(loop);
         sound.play();
-      } else if (sec == 60) {
-        $("span.time_rest").css("color", "#DD0000");
       }
     }, 1000);
     return loop;
   }
 
   // 秒数を渡す
-  // xx'xx"の形式で時間を返す"
+  // xx:xxの形式で時間を返す
   function sec2min(sec) {
     if (isNaN(sec))
       return false;
@@ -53,7 +62,7 @@ $(function() {
     return min + ":" + sec;
   }
 
-  // xx'xx"の形式で時間を渡す
+  // xx:xxの形式で時間を渡す
   // 秒数を返す
   function min2sec(formatted) {
     var formatted = formatted || "";
@@ -64,6 +73,18 @@ $(function() {
     if (sec > 59)
       return false;
     return min * 60 + sec;
+  }
+
+  // location.searchをそのまま渡すと幸せになれる
+  function search2obj(search) {
+    if (!search)
+      return {};
+    search = search.substr(1).split("&");
+    for (var i = 0, obj = {}, size = search.length; i < size; i++) {
+      var q = search[i].split("=");
+      obj[q[0]] = q[1] || "";
+    }
+    return obj;
   }
 
 });
