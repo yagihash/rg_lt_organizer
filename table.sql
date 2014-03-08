@@ -1,4 +1,4 @@
-DROP IF EXISTS `users`;
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id`           BIGINT(10)  NOT NULL AUTO_INCREMENT,
   `ldapunique`   BIGINT(10)  NOT NULL UNIQUE,
@@ -10,7 +10,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 );
 
-DROP IF EXISTS `talks`;
+DROP TABLE IF EXISTS `talks`;
 CREATE TABLE `talks` (
   `id`        BIGINT(10) NOT NULL AUTO_INCREMENT,
   `user_id`   BIGINT(10) NOT NULL,
@@ -24,14 +24,14 @@ CREATE TABLE `talks` (
   PRIMARY KEY (`id`)
 );
 
-DROP IF EXISTS `lt_weeks`;
+DROP TABLE IF EXISTS `lt_weeks`;
 CREATE TABLE `lt_weeks` ( -- LTを実施する週、日付を設定。管理メニューから編集。
   `id`   INT(3) NOT NULL AUTO_INCREMENT,
   `week` INT(2), -- 何週目
   `date` DATE, -- 日付
 );
 
-DROP IF EXISTS `kg`;
+DROP TABLE IF EXISTS `kg`;
 CREATE TABLE `kg` (
   `id`    INT(3) NOT NULL AUTO_INCREMENT,
   `name`  VARCHAR(20) NOT NULL UNIQUE,
