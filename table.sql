@@ -26,15 +26,15 @@ CREATE TABLE `talks` (
 
 DROP IF EXISTS `lt_weeks`;
 CREATE TABLE `lt_weeks` ( -- LTを実施する週、日付を設定。管理メニューから編集。
-  `id` INT(3) NOT NULL AUTO_INCREMENT,
+  `id`   INT(3) NOT NULL AUTO_INCREMENT,
   `week` INT(2), -- 何週目
   `date` DATE, -- 日付
 );
 
 DROP IF EXISTS `kg`;
 CREATE TABLE `kg` (
-  `id` INT(3) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(20) NOT NULL UNIQUE,
+  `id`    INT(3) NOT NULL AUTO_INCREMENT,
+  `name`  VARCHAR(20) NOT NULL UNIQUE,
   PRIMARY KEY (`id`)
 );
 
