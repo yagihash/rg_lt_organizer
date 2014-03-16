@@ -5,43 +5,16 @@ require_once (__DIR__ . "/common.php");
 
 <html lang="ja">
   <head>
-    <?php
-    require_once (__DIR__ . "/head.php");
-    ?>
+<?php
+require_once (__DIR__ . "/head.php");
+?>
   </head>
 
   <body>
     <div id="wrap">
-      <header>
-        <h1 id="title">RG LT Organizer</h1>
-        <p id="description">
-          2014年度春学期のRGの授業のためのページです。
-          <br />
-          LT(Lightning Talk)に関する進行など全般を取り扱うのはこちら。
-          <br />
-          発表者エントリーや資料登録はこちらで行ってください。
-        </p>
-        <nav>
-          <ul>
-            <li>
-              <a href="./">Top</a>
-            </li>
-            <li>
-              <a href="">Registration</a>
-            </li>
-            <li>
-              <a href="">Schedule</a>
-            </li>
-          </ul>
-        </nav>
-        <div id="login_form">
-          <form action="login.php" method="POST">
-            <input type="text" length="10" name="login_name" placeholder="Login name" pattern="[a-zA-Z0-9]{1,10}" maxlength="10" autofocus />
-            <input type="password" length="15" name="password" placeholder="Password" pattern="[a-zA-Z0-9]+" />
-            <input type="submit" value="Log in" />
-          </form>
-        </div>
-      </header>
+<?php
+require_once(__DIR__ . "/page_header.php");
+?>
       <div id="main">
         <h2>Table for April [x]th</h2>
         <table id="presenters">
@@ -50,7 +23,6 @@ require_once (__DIR__ . "/common.php");
               <th>Order</th>
               <th>Presenter</th>
               <th>Title</th>
-              <th>Slides</th>
             </tr>
           </thead>
           <tfoot>
@@ -58,69 +30,58 @@ require_once (__DIR__ . "/common.php");
               <th>Order</th>
               <th>Presenter</th>
               <th>Title</th>
-              <th>Slides</th>
             </tr>
           </tfoot>
           <tbody>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>1</td>
+            	<td>yagihash</td>
+            	<td><a href="#">sample_title_1</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>2</td>
+            	<td>kazu1130</td>
+            	<td><a href="#">sample_title_2</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>3</td>
+            	<td>yagihash</td>
+            	<td><a href="#">sample_title_3</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>4</td>
+            	<td>kazu1130</td>
+            	<td><a href="#">sample_title_4</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>5</td>
+            	<td>yagihash</td>
+            	<td><a href="#">sample_title_5</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>6</td>
+            	<td>kazu1130</td>
+            	<td><a href="#">sample_title_6</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>7</td>
+            	<td>yagihash</td>
+            	<td><a href="#">sample_title_7</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>8</td>
+            	<td>kazu1130</td>
+            	<td><a href="#">sample_title_8</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>9</td>
+            	<td>yagihash</td>
+            	<td><a href="#">sample_title_9</a></td>
             </tr>
             <tr>
-            	<td></td>
-            	<td></td>
-            	<td></td>
-            	<td><a href=""></a></td>
+            	<td>10</td>
+            	<td>kazu1130</td>
+            	<td><a href="#">sample_title_10</a></td>
             </tr>
           </tbody>
         </table>
