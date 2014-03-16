@@ -93,7 +93,7 @@ div#login form {
   height: 20px;
 }
 
-div#login input[type=text], div#login_form input[type=password] {
+div#login input[type=text], div#login input[type=password] {
   width: 80px;
 }
 
