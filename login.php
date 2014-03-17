@@ -1,13 +1,14 @@
 <?php
 require_once (__DIR__ . "/common.php");
 
-if (isset($_SESSION["name"]) or !checkToken($_POST["token"])) {
+if (isset($_SESSION["name"])) {
   header("Location: {$_SESSION['view_page']}");
   die("");
 }
 
 // validate posted parameter
-if (isset($_POST["login_name"]) and
+if (checkToken($_POST["token"]) and
+    isset($_POST["login_name"]) and
     !is_array($_POST["login_name"]) and
     isset($_POST["password"]) and
     !is_array($_POST["password"])) {
