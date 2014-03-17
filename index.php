@@ -25,7 +25,7 @@ require_once(__DIR__ . "/page_header.php");
           <li><span class="rule_item">明るく、楽しく話して、できれば笑いを取る</span></li>
           <li><span class="rule_item">みんなに知ってもらいたいことを話す</span></li>
         </ul>
-        <h2>Table for April [x]th</h2>
+        <h2>Table on April [x]th</h2>
         <table id="presenters">
           <thead>
             <tr>
