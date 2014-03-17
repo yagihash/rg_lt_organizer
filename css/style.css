@@ -43,7 +43,7 @@ nav#top_bar {
   top: 0;
   width: 100%;
   height: 30px;
-  background-color: #DDDDDD;
+  background-color: #C4E9E0;
 }
 
 nav#top_bar ul {
@@ -52,13 +52,15 @@ nav#top_bar ul {
 
 nav#top_bar ul li {
   float: left;
-  margin-right: 30px;
+  margin-right: 2px;
 }
 
 nav#top_bar ul li a {
   display: block;
   height: 30px;
   line-height: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 div#login {
@@ -70,17 +72,17 @@ div#login {
 
 div#login span, div#login a {
   float: left;
-  display: block;
+  padding-left: 8px;
   height: 30px;
   line-height: 30px;
 }
 
-div#login span {
-  width: 150px;
+div#login span#name {
+  font-weight: bold;
 }
 
 div#login a {
-  width: 50px;
+  text-decoration: underline;
 }
 
 div#login form {
@@ -101,9 +103,14 @@ div#nav {
   float: left;
 }
 
+div#nav {
+  margin-top: 20px;
+}
+
 header nav {
   width: 600px;
   height: 50px;
+  margin-top: 10px;
 }
 
 header nav ul li {
@@ -116,6 +123,54 @@ header nav ul li a {
   font-size: 16px;
 }
 
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
 div.content {
   clear: both;
+}
+
+table#presenters {
+  width: 800px;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 20px;
+  border-collapse: collapse;
+}
+
+table#presenters * th {
+  text-align: center;
+  padding: 5px;
+  font-weight: bold;
+}
+
+table#presenters tbody tr:nth-child(odd) {
+  background-color: #C4E9E0;
+}
+
+table#presenters tbody tr td {
+  padding: 5px;
+  text-align: center;
+}
+
+table#presenters tbody tr td:nth-child(1) {
+  width: 30px;
+  font-weight: bold;
+}
+
+table#presenters tbody tr td:nth-child(2) {
+  width: 100px;
+}
+
+table#presenters tbody tr td:nth-child(3) {
+  width: 70px;
+}
+
+table#presenters tbody tr td:nth-child(4) {
+  width: 70px;
+}
+
+table#presenters tbody tr td a:hover {
+  text-decoration: underline;
 }
