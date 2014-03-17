@@ -10,10 +10,10 @@
             <a href="./schedule.php">Schedule</a>
           </li>
           <li>
-            <a href="./regulation.php">Regulation</a>
+            <a href="./archive.php">Archive</a>
           </li>
           <li>
-            <a href="./archive.php">Archive</a>
+            <a href="./timer/">Timer</a>
           </li>
         </ul>
 <?php

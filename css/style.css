@@ -131,6 +131,24 @@ div.content {
   clear: both;
 }
 
+ul#rule {
+  display: block;
+  padding-left: 20px;
+  margin-bottom: 30px;
+}
+
+ul#rule li {
+  list-style-type: square;
+  color: #77DDD1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+span.rule_item {
+  color: #333333;
+  font-size: 14px;
+}
+
 table#presenters {
   width: 800px;
   margin: auto;

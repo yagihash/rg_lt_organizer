@@ -19,6 +19,12 @@ require_once(__DIR__ . "/top_bar.php");
 require_once(__DIR__ . "/page_header.php");
 ?>
       <div id="main" class="content">
+        <h2>Rule</h2>
+        <ul id="rule">
+          <li><span class="rule_item">5分間で、濃すぎず、薄すぎないように話す</span></li>
+          <li><span class="rule_item">明るく、楽しく話して、できれば笑いを取る</span></li>
+          <li><span class="rule_item">みんなに知ってもらいたいことを話す</span></li>
+        </ul>
         <h2>Table for April [x]th</h2>
         <table id="presenters">
           <thead>
