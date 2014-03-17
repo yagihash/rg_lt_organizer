@@ -10,7 +10,7 @@
                 <a href="./">Top</a>
               </li>
               <li>
-                <a href="./register.php">Registration</a>
+                <a href="./register.php">Register</a>
               </li>
               <li>
                 <a href="./schedule.php">Schedule</a>

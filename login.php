@@ -1,8 +1,8 @@
 <?php
 require_once (__DIR__ . "/common.php");
 
-if (isset($_SESSION["name"])) {
-  header("Location: {$base_url}/");
+if (isset($_SESSION["name"]) or !checkToken($_POST["token"])) {
+  header("Location: {$_SESSION['view_page']}");
   die("");
 }
 
@@ -14,7 +14,7 @@ if (isset($_POST["login_name"]) and
   $login_name = $_POST["login_name"];
   $password = $_POST["password"];
 } else {
-  header("Location: {$base_url}/");
+  header("Location: {$_SESSION['view_page']}");
   die("");
 }
 
@@ -23,20 +23,7 @@ if (isset($_POST["login_name"]) and
 $auth = TRUE;
 if($auth) {
   $_SESSION["name"] = $login_name;
-  header("Location: {$base_url}/");
+  header("Location: {$_SESSION['view_page']}");
+  unset($_SESSION['view_page']);
   die("");
 }
-?>
-<!DOCTYPE html>
-
-<html lang="ja">
-  <head>
-    <?php
-    require_once (__DIR__ . "/head.php");
-    ?>
-  </head>
-
-  <body>
-
-  </body>
-</html>
