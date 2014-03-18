@@ -192,3 +192,28 @@ table#presenters tbody tr td:nth-child(4) {
 table#presenters tbody tr td a:hover {
   text-decoration: underline;
 }
+
+form#register label {
+  display: block;
+  width: 400px;
+  margin-top: 20px;
+}
+
+form#register label.check {
+  margin-top: 0;
+  margin-left: 60px;
+}
+
+form#register label span {
+  display: inline-block;
+  width: 60px;
+}
+
+form#register input[type=text] {
+  width: 300px;
+}
+
+form#register input[type=submit] {
+  margin-left: 60px;
+  margin-top: 20px;
+}
