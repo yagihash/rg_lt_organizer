@@ -10,10 +10,10 @@ if (isset($_SESSION["name"])) {
 }
 
 // validate posted parameter
-if (isset($_POST["token"]) and checkToken($_POST["token"]) and isset($_POST["login_name"]) and !is_array($_POST["login_name"]) and isset($_POST["password"]) and !is_array($_POST["password"])) {
-  $login_name = $_POST["login_name"];
-  $password = $_POST["password"];
-} else {
+$token = postParamValidate("token");
+$login_name = postParamValidate("login_name");
+$password = postParamValidate("password");
+if (!($token and $login_name and $password)) {
   header("Location: {$dest}");
   die("");
 }
