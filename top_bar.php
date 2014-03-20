@@ -20,7 +20,7 @@
   if($isAuthed) {
 ?>
         <div id="login">
-          <span>Hello,</span><span id="name"><?php echo $_SESSION["name"]; ?></span>
+          <span>Hello,</span><span id="name"><?php echo escapeHTML($_SESSION["name"]); ?></span>
           <a href="<?php echo "{$base_url}/logout.php"; ?>">Logout</a>
         </div>
 <?php
