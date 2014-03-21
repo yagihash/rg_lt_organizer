@@ -39,6 +39,29 @@ if(checkToken($token)){
       $kg->name = $name;
       $kg->save();
     }
+  }else if($mode == "week_add"){
+    $week = postParamValidate("week");
+    $date = postParamValidate("date");
+    $lt_week = LtWeek::create();
+    $lt_week->week = $week;
+    $lt_week->date = $date;
+    $lt_week->save();
+  }else if($mode == "week_delete"){
+    $week_id = postParamValidate("id");
+    $lt_week = LtWeek::find_one($week_id);
+    if($lt_week !== false){
+      $lt_week->delete();
+    }
+  }else if($mode == "week_change"){
+    $week_id = postParamValidate("id");
+    $lt_week = LtWeek::find_one($week_id);
+    if($lt_week !== false){
+      $date = postParamValidate("date")?postParamValidate("date"):$lt_week->date;
+      $week = postParamValidate("week")?postParamValidate("week"):$lt_week->week;
+      $lt_week->date = $date;
+      $lt_week->week = $week;
+      $lt_week->save();
+    }
   }
 }
 ?>
@@ -92,6 +115,45 @@ foreach($kgs as $kg){
             </select>
             <input type="text" name="name" placeholder="KG name" />
             <input type="submit" value="Change KG name" />
+          </form>
+          <form action="admin.php" method="POST">
+            <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
+            <input type="hidden" name="mode" value="week_add" />
+            <input type="text" name="week" pattern="^[0-9]{1,2}$" maxlength="2" placeholder="Week" />
+            <input type="text" name="date" pattern="^[0-9]{4}-\d{2}-\d{2}$" maxlength="10" placeholder="Date" /><!-- Picker -->
+            <input type="submit" value="Add Week" />
+          </form>
+          <form action="admin.php" method="POST">
+            <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
+            <input type="hidden" name="mode" value="week_delete" />
+            <select name="id" required>
+              <option value="">-----</option>
+
+<?php
+$lt_weeks = LtWeek::find_many();
+foreach($lt_weeks as $lt_week){
+  echo "              <option value=\"{$lt_week->id}\">第{$lt_week->week}回目({$lt_week->date})</option>";
+}
+?>
+            </select>
+            <input type="submit" value="Delete Week" />
+          </form>
+          <form action="admin.php" method="POST">
+            <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
+            <input type="hidden" name="mode" value="week_change" />
+            <select name="id" required>
+              <option value="">-----</option>
+
+<?php
+$lt_weeks = LtWeek::find_many();
+foreach($lt_weeks as $lt_week){
+  echo "              <option value=\"{$lt_week->id}\">第{$lt_week->week}回目({$lt_week->date})</option>";
+}
+?>
+            </select>
+            <input type="text" name="week" pattern="^[0-9]{1,2}$" maxlength="2" placeholder="Week" />
+            <input type="text" name="date" pattern="^[0-9]{4}-\d{2}-\d{2}$" maxlength="10" placeholder="Date" /><!-- Picker -->
+            <input type="submit" value="Change Week" />
           </form>
     </div>
   </body>
