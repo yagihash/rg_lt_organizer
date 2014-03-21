@@ -18,50 +18,56 @@ $token = postParamValidate("token");
 $mode = postParamValidate("mode");
 
 if(checkToken($token)){
-  if($mode == "kg_add"){
-    $name = postParamValidate("name");
-    if($name != ""){
-      $new_kg = KG::create();
-      $new_kg->name = $name;
-      $new_kg->save();
-    }
-  }else if($mode == "kg_delete"){
-    $kg_id = postParamValidate("id");
-    $kg = KG::find_one($kg_id);
-    if($kg !== false){
-      $kg->delete();
-    }
-  }else if($mode == "kg_change"){
-    $name = postParamValidate("name");
-    $kg_id = postParamValidate("id");
-    $kg = KG::find_one($kg_id);
-    if($kg !== false){
-      $kg->name = $name;
-      $kg->save();
-    }
-  }else if($mode == "week_add"){
-    $week = postParamValidate("week");
-    $date = postParamValidate("date");
-    $lt_week = LtWeek::create();
-    $lt_week->week = $week;
-    $lt_week->date = $date;
-    $lt_week->save();
-  }else if($mode == "week_delete"){
-    $week_id = postParamValidate("id");
-    $lt_week = LtWeek::find_one($week_id);
-    if($lt_week !== false){
-      $lt_week->delete();
-    }
-  }else if($mode == "week_change"){
-    $week_id = postParamValidate("id");
-    $lt_week = LtWeek::find_one($week_id);
-    if($lt_week !== false){
-      $date = postParamValidate("date")?postParamValidate("date"):$lt_week->date;
-      $week = postParamValidate("week")?postParamValidate("week"):$lt_week->week;
-      $lt_week->date = $date;
+  try {
+    if($mode == "kg_add"){
+      $name = postParamValidate("name");
+      if($name != ""){
+        $new_kg = KG::create();
+        $new_kg->name = $name;
+        $new_kg->save();
+      }
+    }else if($mode == "kg_delete"){
+      $kg_id = postParamValidate("id");
+      $kg = KG::find_one($kg_id);
+      if($kg !== false){
+        $kg->delete();
+      }
+    }else if($mode == "kg_change"){
+      $name = postParamValidate("name");
+      $kg_id = postParamValidate("id");
+      $kg = KG::find_one($kg_id);
+      if($kg !== false){
+        $kg->name = $name;
+        $kg->save();
+      }
+    }else if($mode == "week_add"){
+      $week = postParamValidate("week");
+      $date = postParamValidate("date");
+      $lt_week = LtWeek::create();
       $lt_week->week = $week;
+      $lt_week->date = $date;
       $lt_week->save();
+    }else if($mode == "week_delete"){
+      $week_id = postParamValidate("id");
+      $lt_week = LtWeek::find_one($week_id);
+      if($lt_week !== false){
+        $lt_week->delete();
+      }
+    }else if($mode == "week_change"){
+      $week_id = postParamValidate("id");
+      $lt_week = LtWeek::find_one($week_id);
+      if($lt_week !== false){
+        $date = postParamValidate("date")?postParamValidate("date"):$lt_week->date;
+        $week = postParamValidate("week")?postParamValidate("week"):$lt_week->week;
+        $lt_week->date = $date;
+        $lt_week->week = $week;
+       $lt_week->save();
+      }
     }
+  } catch(PDOException $e){
+    //主にユニーク設定したものが衝突した場合に起こる
+    //TODO: いい感じのメッセージを表示する
+    $error_flag = true;
   }
 }
 ?>
@@ -95,7 +101,7 @@ require_once(__DIR__ . "/top_bar.php");
 <?php
 $kgs = KG::find_many();
 foreach($kgs as $kg){
-  echo "              <option value=\"{$kg->id}\">{$kg->name}</option>";
+  echo "              <option value=\"".escapeHTML($kg->id)."\">".escapeHTML($kg->name)."</option>";
 }
 ?>
             </select>
@@ -109,7 +115,7 @@ foreach($kgs as $kg){
 <?php
 $kgs = KG::find_many();
 foreach($kgs as $kg){
-  echo "              <option value=\"{$kg->id}\">{$kg->name}</option>";
+  echo "              <option value=\"".escapeHTML($kg->id)."\">".escapeHTML($kg->name)."</option>";
 }
 ?>
             </select>
@@ -132,7 +138,7 @@ foreach($kgs as $kg){
 <?php
 $lt_weeks = LtWeek::find_many();
 foreach($lt_weeks as $lt_week){
-  echo "              <option value=\"{$lt_week->id}\">第{$lt_week->week}回目({$lt_week->date})</option>";
+  echo "              <option value=\"".escapeHTML($lt_week->id)."\">第".escapeHTML($lt_week->week)."回目(".escapeHTML($lt_week->date).")</option>";
 }
 ?>
             </select>
@@ -147,7 +153,7 @@ foreach($lt_weeks as $lt_week){
 <?php
 $lt_weeks = LtWeek::find_many();
 foreach($lt_weeks as $lt_week){
-  echo "              <option value=\"{$lt_week->id}\">第{$lt_week->week}回目({$lt_week->date})</option>";
+  echo "              <option value=\"".escapeHTML($lt_week->id)."\">第".escapeHTML($lt_week->week)."回目(".escapeHTML($lt_week->date).")</option>";
 }
 ?>
             </select>
