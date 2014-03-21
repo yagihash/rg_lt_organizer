@@ -21,7 +21,7 @@ if (!($token and $login_name and $password)) {
 $authinfra = new Authenticator();
 $current_user = $authinfra -> passwordAuth($login_name, $password);
 //$auth = TRUE;
-if (isset($current_user->login_name)) {
+if ($current_user !== false) {
   $_SESSION["name"] = $current_user->login_name;
   $_SESSION["current_id"] = $current_user->id;
   header("Location: {$dest}");
