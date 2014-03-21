@@ -1,6 +1,6 @@
 <?php
 
-class LtWeek extends Model{
+class KG extends Model{
   public static $_table = 'kgs';
 
   public function members(){
