@@ -17,17 +17,30 @@ if(!$isAdmin){
 $token = postParamValidate("token");
 $mode = postParamValidate("mode");
 
-if($mode == "kg_add"){
-  $name = postParamValidate("name");
-  $new_kg = KG::create();
-  $new_kg->name = $name;
-  $new_kg->save();
-}else if($mode == "kg_delete"){
-  $kg_id = postParamValidate("id");
-  $kg = KG::find_one($kg_id);
-  $kg->delete();
+if(checkToken($token)){
+  if($mode == "kg_add"){
+    $name = postParamValidate("name");
+    if($name != ""){
+      $new_kg = KG::create();
+      $new_kg->name = $name;
+      $new_kg->save();
+    }
+  }else if($mode == "kg_delete"){
+    $kg_id = postParamValidate("id");
+    $kg = KG::find_one($kg_id);
+    if($kg !== false){
+      $kg->delete();
+    }
+  }else if($mode == "kg_change"){
+    $name = postParamValidate("name");
+    $kg_id = postParamValidate("id");
+    $kg = KG::find_one($kg_id);
+    if($kg !== false){
+      $kg->name = $name;
+      $kg->save();
+    }
+  }
 }
-
 ?>
 <!DOCTYPE html>
 
@@ -48,7 +61,7 @@ require_once(__DIR__ . "/top_bar.php");
           <form action="admin.php" method="POST">
             <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
             <input type="hidden" name="mode" value="kg_add" />
-            <input type="text" name="name" placeholder="KG name" autofocus />
+            <input type="text" name="name" placeholder="KG name" />
             <input type="submit" value="Add KG" />
           </form>
           <form action="admin.php" method="POST">
@@ -62,8 +75,23 @@ foreach($kgs as $kg){
   echo "              <option value=\"{$kg->id}\">{$kg->name}</option>";
 }
 ?>
-            <input type="submit" value="Delete KG" />
             </select>
+            <input type="submit" value="Delete KG" />
+          </form>
+          <form action="admin.php" method="POST">
+            <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
+            <input type="hidden" name="mode" value="kg_change" />
+            <select name="id" required>
+              <option value="">-----</option>
+<?php
+$kgs = KG::find_many();
+foreach($kgs as $kg){
+  echo "              <option value=\"{$kg->id}\">{$kg->name}</option>";
+}
+?>
+            </select>
+            <input type="text" name="name" placeholder="KG name" />
+            <input type="submit" value="Change KG name" />
           </form>
     </div>
   </body>
