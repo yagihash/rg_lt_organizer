@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS `talks`;
 CREATE TABLE `talks` (
            `id` BIGINT(10) NOT NULL AUTO_INCREMENT,
       `user_id` BIGINT(10) NOT NULL,
-       `slides` VARCHAR(500), -- スライドのURL
+       `slide` VARCHAR(500), -- スライドのURL
       `week_id` INT(3),
     `timeadded` TIMESTAMP, -- 自動でタイムスタンプ追加
     
@@ -31,10 +31,13 @@ CREATE TABLE `lt_weeks` ( -- LTを実施する週、日付を設定。管理メ�
            `id` INT(3) NOT NULL AUTO_INCREMENT,
          `week` INT(2), -- 何週目
          `date` DATE, -- 日付
+
+  PRIMARY KEY (`id`)
+
 );
 
-DROP TABLE IF EXISTS `kg`;
-CREATE TABLE `kg` (
+DROP TABLE IF EXISTS `kgs`;
+CREATE TABLE `kgs` (
            `id` INT(3) NOT NULL AUTO_INCREMENT,
          `name` VARCHAR(20) NOT NULL UNIQUE,
   
