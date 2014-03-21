@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 class Authenticator {
    public function passwordAuth($login_name,$password){

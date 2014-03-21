@@ -18,11 +18,40 @@ if (!($token and $login_name and $password)) {
   die("");
 }
 
-// $LDAP_CON = new $LDAP_IF();
-// $auth = $LDAP_CON -> auth($login_name, $password);
-$auth = TRUE;
-if ($auth) {
-  $_SESSION["name"] = $login_name;
+$authinfra = new Authenticator();
+$current_user = $authinfra -> passwordAuth($login_name, $password);
+//$auth = TRUE;
+if (isset($current_user->login_name)) {
+  $_SESSION["name"] = $current_user->login_name;
   header("Location: {$dest}");
   die("");
+} else {
+?>
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+<?php
+require_once (__DIR__ . "/head.php");
+?>
+  </head>
+
+  <body>
+<?php
+require_once(__DIR__ . "/top_bar.php");
+?>
+    <div id="wrap">
+<?php
+require_once(__DIR__ . "/page_header.php");
+?>
+    </div>
+    <div id="main" class="content">
+      <h1>ログインエラー</h1>
+    </div>
+  </body>
+</html>
+
+
+<?php
 }
