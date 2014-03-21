@@ -99,6 +99,17 @@ div#login input[type=text], div#login input[type=password] {
   width: 80px;
 }
 
+div#login input[type=submit] {
+  width: 50px;
+  height: 20px;
+  border: solid 2px #FFFFFF;
+  background-color: #C4E9E0;
+}
+
+div#login input[type=submit]:hover {
+  background-color: #77DDD1;
+}
+
 div#nav {
   float: left;
 }
