@@ -23,6 +23,7 @@ $current_user = $authinfra -> passwordAuth($login_name, $password);
 //$auth = TRUE;
 if (isset($current_user->login_name)) {
   $_SESSION["name"] = $current_user->login_name;
+  $_SESSION["current_id"] = $current_user->id;
   header("Location: {$dest}");
   die("");
 } else {
