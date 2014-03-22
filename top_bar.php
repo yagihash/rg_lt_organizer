@@ -15,6 +15,17 @@
           <li>
             <a href="./timer/">Timer</a>
           </li>
+<?php
+  if($isAuthed){
+    if($current_user->isAdmin()){
+?>
+          <li>
+            <a href="./admin.php">Admin</a>
+          </li>
+<?php
+    }
+  }
+?>
         </ul>
 <?php
   if($isAuthed) {
