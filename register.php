@@ -21,42 +21,95 @@ require_once (__DIR__ . "/page_header.php");
       <div id="main" class="content">
 <?php
 if($isAuthed) {
+  $token = postParamValidate("token");
+  if(checkToken($token)){
+    $title = postParamValidate("title");
+    $sname = postParamValidate("screen");
+    $week_id = postParamValidate("date");
+    $kg_id = postParamValidate("kg");
+    $year_id = postParamValidate("year");
+    
+    //整合性チェック
+    $kg = KG::find_one($kg_id);
+    $year = Year::find_one($year_id);
+    $week = LtWeek::find_one($week_id);
+
+    //TODO: PDFかどうかをチェックする
+    $filename = md5($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
+    $filepath =  "slides/" . $filename;
+    if($title !== false && $week !== false && $kg !== false && $year !== false && is_uploaded_file($_FILES["slide"]["tmp_name"])){
+      //ユーザ情報の保存
+      $need_save = false;
+      if($current_user->kg_id != $kg_id){
+        $current_user->kg_id = $kg_id;
+        $need_save = true;
+      }
+      if($current_user->year_id != $year_id){
+        $current_user->year_id = $year_id;
+        $need_save = true;
+      }
+      if($current_user->screen_name !== $sname){
+        $current_user->screen_name = $sname;
+        $need_save = true;
+      }
+
+      if($need_save){
+        $current_user->save();
+      }
+      
+      //LTデータ保存
+      
+      $talk = Talk::create();
+      $talk->user_id = $current_user->id;
+      $talk->week_id = $week_id;
+      $talk->title = $title;
+      
+      if (move_uploaded_file($_FILES["slide"]["tmp_name"], $filepath)) {
+        chmod($filepath, 0644);
+      } else {
+        echo "Unkown Error";
+        exit();
+      }
+      $talk->slide = $filename;
+      $talk->save();
+    }
+  }
 ?>
         <h2>Register</h2>
-        <form id="register" method="POST">
+        <form id="register" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
           <label><span>Date:</span><select name="date" required>
-            <option value="1">4/10</option>
-            <option value="2">4/17</option>
-            <option value="3">4/24</option>
-            <option value="4">5/1</option>
-            <option value="5">5/8</option>
+<?php
+  $lt_weeks = LtWeek::order_by_asc("week")->find_many();
+  foreach($lt_weeks as $lt_week){
+    echo "              <option value=\"".escapeHTML($lt_week->id)."\">第".escapeHTML($lt_week->week)."回目(".escapeHTML($lt_week->date).")</option>";
+  }
+?>
           </select></label>
+          <label><span>ScreenName:</span><input type="text" name="screen" placeholder="Ex.) ナカジマ" maxlength="100" /></label>
           <label><span>Title:</span><input type="text" name="title" placeholder="Ex.) キャベツとレタス、どっちがセキュア？" maxlength="100" required /></label>
           <label><span>Slides:</span><input type="file" name="slide" accept="application/pdf" required /></label>
-          <label class="check">スライドをこのページで公開する<input type="checkbox" name="publish_slide" checked /></label>
+          <label class="check">スライドを非公開に設定する<input type="checkbox" name="publish_slide" checked /></label>
           <label><span>KG:</span><select name="kg" required>
-            <option value="">-----</option>
-            <option value="isc">ISC</option>
-            <option value="hoge">HOGE</option>
-            <option value="fuga">FUGA</option>
-            <option value="piyo">PIYO</option>
+<?php
+  $kgs = KG::find_many();
+  foreach($kgs as $kg){
+    echo "              <option value=\"".escapeHTML($kg->id)."\"".($current_user?($kg->id == $current_user->kg_id?" selected":""):"").">".escapeHTML($kg->name)."</option>";
+  }
+?>
           </select></label>
           <label><span>Year:</span><select name="year" required><!-- TODO: 一度登録すると以降は勝手にKGと学年選んでくれるように -->
-            <option value="">-----</option>
-            <option value="b1">B1</option>
-            <option value="b2">B2</option>
-            <option value="b3">B3</option>
-            <option value="b4">B4</option>
-            <option value="m1">M1</option>
-            <option value="m2">M2</option>
-            <option value="faculty">Faculty</option>
-            <option value="other">Other</option>
+<?php
+  $years = Year::order_by_asc("id")->find_many();
+  foreach($years as $year){
+    echo "              <option value=\"".escapeHTML($year->id)."\"".($current_user?($year->id == $current_user->year_id?" selected":""):"").">".escapeHTML($year->name)."</option>";
+  }
+?>
           </select></label>
           <input type="submit" value="Submit" />
         </form>
 <?php
-        } else {
+} else {
 ?>
         <h2>Error</h2>
         <p>
