@@ -4,6 +4,6 @@ class KG extends Model{
   public static $_table = 'kgs';
 
   public function members(){
-    return $this->has_many('Users');
+    return $this->has_many('Users','user_id')->find_many();
   }
 }
