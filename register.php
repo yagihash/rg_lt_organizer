@@ -61,7 +61,7 @@ if($isAuthed) {
       
       $talk = Talk::create();
       $talk->user_id = $current_user->id;
-      $talk->week_id = $week_id;
+      $talk->lt_week_id = $week_id;
       $talk->title = $title;
       
       if (move_uploaded_file($_FILES["slide"]["tmp_name"], $filepath)) {
@@ -86,7 +86,7 @@ if($isAuthed) {
   }
 ?>
           </select></label>
-          <label><span>ScreenName:</span><input type="text" name="screen" placeholder="Ex.) ナカジマ" maxlength="100" /></label>
+          <label><span>ScreenName:</span><input type="text" name="screen" placeholder="Ex.) ナカジマ" value="<?php echo $current_user?($current_user->screen_name):"";?>"maxlength="100" /></label>
           <label><span>Title:</span><input type="text" name="title" placeholder="Ex.) キャベツとレタス、どっちがセキュア？" maxlength="100" required /></label>
           <label><span>Slides:</span><input type="file" name="slide" accept="application/pdf" required /></label>
           <label class="check">スライドを非公開に設定する<input type="checkbox" name="publish_slide" checked /></label>
