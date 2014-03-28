@@ -60,7 +60,7 @@ if($lt_week !== false){
               <th>Title</th>
             </tr>
           </tfoot>
-          <tbody><!-- スライドへのリンクはログインしないと有効にならないようにする -->
+          <tbody>
 <?php
 foreach($talks as $talk){
   $talker = $talk->user();
@@ -75,13 +75,6 @@ foreach($talks as $talk){
 <?php
 }
 ?>
-            <tr>
-            	<td>2</td>
-            	<td>kazu1130</td>
-            	<td>ISC</td>
-              <td>B3</td>
-            	<td><a href="#">sample_title_2</a></td>
-            </tr>
           </tbody>
         </table>
       </div>
