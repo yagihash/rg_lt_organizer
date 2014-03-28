@@ -54,7 +54,7 @@ foreach($lt_weeks as $lt_week){
             	<td><?php echo escapeHTML($talker->screen_name); ?></td>
             	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
             	<td><?php echo escapeHTML($talker->year()->name); ?></td>
-            	<td><?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '.pdf">';} ?>sample_title_1<?php if($isAuthed){echo "</a>";} ?></td>
+            	<td><?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '">';} ?>sample_title_1<?php if($isAuthed){echo "</a>";} ?></td>
             </tr>
 <?php
   }

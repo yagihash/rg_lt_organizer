@@ -35,7 +35,7 @@ if($isAuthed) {
     $week = LtWeek::find_one($week_id);
 
     //TODO: PDFかどうかをチェックする
-    $filename = md5($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
+    $filename = sha1($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
     $filepath =  "slides/" . $filename;
     if($title !== false && $week !== false && $kg !== false && $year !== false && is_uploaded_file($_FILES["slide"]["tmp_name"])){
       //ユーザ情報の保存
