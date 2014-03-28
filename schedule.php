@@ -18,6 +18,53 @@ require_once(__DIR__ . "/top_bar.php");
 <?php
 require_once(__DIR__ . "/page_header.php");
 ?>
+      <div id="main" class="content">
+<?php
+$lt_weeks = LtWeek::order_by_asc("week")->find_many();
+foreach($lt_weeks as $lt_week){
+?>
+        <h2>Table on <?php echo escapeHTML($lt_week->date); ?> (第<?php echo escapeHTML($lt_week->week); ?>週目)</h2>
+        <table id="presenters">
+          <thead>
+            <tr>
+              <th> </th>
+              <th>Presenter</th>
+              <th>KG</th>
+              <th>Year</th>
+              <th>Title</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th> </th>
+              <th>Presenter</th>
+              <th>KG</th>
+              <th>Year</th>
+              <th>Title</th>
+            </tr>
+          </tfoot>
+          <tbody>
+<?php
+  $talks = $lt_week->talks();
+  foreach($talks as $talk){
+    $talker = $talk->user();
+?>
+            <tr>
+            	<td><?php echo escapeHTML($talk->id); ?></td>
+            	<td><?php echo escapeHTML($talker->screen_name); ?></td>
+            	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
+            	<td><?php echo escapeHTML($talker->year()->name); ?></td>
+            	<td><?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '.pdf">';} ?>sample_title_1<?php if($isAuthed){echo "</a>";} ?></td>
+            </tr>
+<?php
+  }
+?>
+          </tbody>
+        </table>
+<?php
+}
+?>
+      </div>
     </div>
   </body>
 </html>
