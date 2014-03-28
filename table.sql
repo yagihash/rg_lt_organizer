@@ -18,11 +18,11 @@ CREATE TABLE `talks` (
       `user_id` BIGINT(10) NOT NULL,
        `title` VARCHAR(500),
        `slide` VARCHAR(500), -- スライドのURL
-      `week_id` INT(3),
+      `lt_week_id` INT(3),
     `timeadded` TIMESTAMP, -- 自動でタイムスタンプ追加
   FOREIGN KEY (`user_id`)
     REFERENCES users(`id`),
-  FOREIGN KEY (`week_id`)
+  FOREIGN KEY (`lt_week_id`)
     REFERENCES lt_weeks(`id`),
   PRIMARY KEY (`id`)
 );
@@ -73,3 +73,8 @@ INSERT INTO years(name) VALUES ("M1");
 INSERT INTO years(name) VALUES ("M2");
 INSERT INTO years(name) VALUES ("Faculty");
 INSERT INTO years(name) VALUES ("Other");
+
+
+-- テスト用ユーザ
+INSERT INTO `users` (`id`, `ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`, `timeadded`) VALUES
+(1, 1, 'test', 'ssss', 2, NULL, 5, '2014-03-28 05:48:19');
