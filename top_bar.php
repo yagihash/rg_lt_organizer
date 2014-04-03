@@ -7,9 +7,6 @@
             <a href="./register.php">Register</a>
           </li>
           <li>
-            <a href="./schedule.php">Schedule</a>
-          </li>
-          <li>
             <a href="./archive.php">Archive</a>
           </li>
           <li>
