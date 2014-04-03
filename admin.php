@@ -2,12 +2,7 @@
 require_once (__DIR__ . "/common.php");
 $isAdmin = false;
 if($isAuthed){
-  $user = User::find_one($_SESSION["current_id"]);
-  //TODO: どうにかする
-  if($user->login_name == "kazu1130" || 
-     $user->login_name == "yagihash" ){
-    $isAdmin = true;
-  }
+  $isAdmin = $current_user->isAdmin();
 }
 if(!$isAdmin){
   header("Location: {$base_url}");

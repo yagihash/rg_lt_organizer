@@ -14,9 +14,10 @@ ORM::configure("username", "user");
 ORM::configure("password", "password");
 require_once (__DIR__ . "/lib/j4mie/paris.php");
 
-spl_autoload_register(function($class) {
-  include_once __DIR__ . "/class/" . $class . ".php";
+spl_autoload_register(function ($class) {
+  include_once (__DIR__ . "/class/" . $class . ".php");
 });
+
 
 $base_url = dirname($_SERVER["SCRIPT_NAME"]);
 
@@ -25,7 +26,9 @@ ini_set("session.cookie_httponly", true);
 ini_set("session.gc_maxlifetime", 60 * 60 * 10);
 session_start();
 
-$isAuthed = isset($_SESSION["name"]);
+$isAuthed = isset($_SESSION["current_id"]);
+$current_user = false;
 if ($isAuthed) {
   session_regenerate_id(true);
+  $current_user = User::find_one($_SESSION["current_id"]);
 }
