@@ -216,16 +216,16 @@ form#register label {
 
 form#register label.check {
   margin-top: 0;
-  margin-left: 60px;
+  margin-left: 100px;
 }
 
 form#register label span {
   display: inline-block;
-  width: 60px;
+  width: 100px;
 }
 
 form#register input[type=text] {
-  width: 300px;
+  width: 260px;
 }
 
 form#register input[type=submit] {

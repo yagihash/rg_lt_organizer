@@ -29,16 +29,16 @@ if($isAuthed) {
     $kg_id = postParamValidate("kg");
     $year_id = postParamValidate("year");
     
-    //整合性チェック
+    // 整合性チェック
     $kg = KG::find_one($kg_id);
     $year = Year::find_one($year_id);
     $week = LtWeek::find_one($week_id);
 
-    //TODO: PDFかどうかをチェックする
+    // TODO: PDFかどうかをチェックする
     $filename = sha1($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
     $filepath =  "slides/" . $filename;
     if($title !== false && $week !== false && $kg !== false && $year !== false && is_uploaded_file($_FILES["slide"]["tmp_name"])){
-      //ユーザ情報の保存
+      // ユーザ情報の保存
       $need_save = false;
       if($current_user->kg_id != $kg_id){
         $current_user->kg_id = $kg_id;
@@ -57,8 +57,7 @@ if($isAuthed) {
         $current_user->save();
       }
       
-      //LTデータ保存
-      
+      // LTデータ保存
       $talk = Talk::create();
       $talk->user_id = $current_user->id;
       $talk->lt_week_id = $week_id;
@@ -86,10 +85,10 @@ if($isAuthed) {
   }
 ?>
           </select></label>
-          <label><span>ScreenName:</span><input type="text" name="screen" placeholder="Ex.) ナカジマ" value="<?php echo $current_user?($current_user->screen_name):"";?>"maxlength="100" /></label>
+          <label><span>Screen name:</span><input type="text" name="screen" placeholder="Ex.) ナカジマ" value="<?php echo $current_user?($current_user->screen_name):"";?>"maxlength="100" /></label>
           <label><span>Title:</span><input type="text" name="title" placeholder="Ex.) キャベツとレタス、どっちがセキュア？" maxlength="100" required /></label>
           <label><span>Slides:</span><input type="file" name="slide" accept="application/pdf" required /></label>
-          <label class="check">スライドを非公開に設定する<input type="checkbox" name="publish_slide" checked /></label>
+          <label class="check">スライドを非公開に設定する<input type="checkbox" name="publish_slide" /></label>
           <label><span>KG:</span><select name="kg" required>
 <?php
   $kgs = KG::find_many();
