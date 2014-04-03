@@ -10,8 +10,8 @@ foreach ($utils as $file_path)
 
 require_once (__DIR__ . "/lib/j4mie/idiorm.php");
 ORM::configure("mysql:dbname=rg;host=127.0.0.1;charset=utf8;");
-ORM::configure("username", "rg");
-ORM::configure("password", "smARFbVawcUXCKaj");
+ORM::configure("username", "user");
+ORM::configure("password", "password");
 require_once (__DIR__ . "/lib/j4mie/paris.php");
 
 spl_autoload_register(function($class) {
