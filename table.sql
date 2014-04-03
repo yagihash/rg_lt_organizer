@@ -76,5 +76,5 @@ INSERT INTO years(name) VALUES ("Other");
 
 
 -- テスト用ユーザ
-INSERT INTO `users` (`id`, `ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`, `timeadded`) VALUES
-(1, 1, 'test', 'ssss', 2, NULL, 5, '2014-03-28 05:48:19');
+INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (1, 'test', 'I am a test account', 2, NULL, 5);
+INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (1, 'yagihash', 'yagihash', 2, NULL, 5);
