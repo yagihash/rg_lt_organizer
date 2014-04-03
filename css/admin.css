@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+div.admin h3 {
+  margin-top: 10px;
+}
+
+div.admin_form_box {
+  margin-bottom: 20px;
+}
+
+div.admin_form_box form {
+  margin-bottom: 10px;
+}

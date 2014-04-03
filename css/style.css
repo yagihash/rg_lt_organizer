@@ -38,6 +38,10 @@ div#wrap {
   margin-bottom: 30px;
 }
 
+div#main {
+  clear: both;
+}
+
 nav#top_bar {
   position: fixed;
   top: 0;
