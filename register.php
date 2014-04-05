@@ -22,6 +22,7 @@ require_once (__DIR__ . "/page_header.php");
 <?php
 if($isAuthed) {
   $token = postParamValidate("token");
+  $saved = false;
   if(checkToken($token)){
     $title = postParamValidate("title");
     $sname = postParamValidate("screen");
@@ -71,8 +72,16 @@ if($isAuthed) {
       }
       $talk->slide = $filename;
       $talk->save();
+      $saved = true;
     }
   }
+  if($saved){
+?>
+        <h2>Register</h2>
+        <h3>登録しました。</h3>
+        <a href="mypage.php">マイページへ</a>
+<?php
+  }else{
 ?>
         <h2>Register</h2>
         <form id="register" method="POST" enctype="multipart/form-data">
@@ -108,6 +117,7 @@ if($isAuthed) {
           <input type="submit" value="Submit" />
         </form>
 <?php
+  }
 } else {
 ?>
         <h2>Error</h2>
