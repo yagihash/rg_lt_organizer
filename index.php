@@ -18,18 +18,23 @@ require_once(__DIR__ . "/top_bar.php");
 <?php
 require_once(__DIR__ . "/page_header.php");
 
-//一番近い日付のデータを取ってくるRAW_SQL
-$lt_week = LtWeek::raw_query('SELECT * FROM lt_weeks ORDER BY abs(cast(CURDATE() as SIGNED) - cast(date as SIGNED)) LIMIT 1')->find_one();
+//次回のLTの予定を取ってくるRAW_SQL
+$lt_week = LtWeek::raw_query('SELECT * FROM lt_weeks WHERE date >= CURDATE() ORDER BY abs(cast(CURDATE() as SIGNED) - cast(date as SIGNED)) LIMIT 1')->find_one();
 $talks = array();
 if($lt_week !== false){
   $talks = $lt_week->talks();
 } else {
-  //空だった場合のぬるぽ防止
-  $lt_week = LtWeek::create();
-  $lt_week->date = date("Y-m-d");
-  $lt_week->week = 0;
-  $lt_week->id = 0;
-  
+  //一番近い日付のデータを取ってくるRAW_SQL
+  $lt_week = LtWeek::raw_query('SELECT * FROM lt_weeks ORDER BY abs(cast(CURDATE() as SIGNED) - cast(date as SIGNED)) LIMIT 1')->find_one();
+  if($lt_week !== false){
+    $talks = $lt_week->talks();
+  } else {
+    //空だった場合のぬるぽ防止
+    $lt_week = LtWeek::create();
+    $lt_week->date = date("Y-m-d");
+    $lt_week->week = 0;
+    $lt_week->id = 0;
+  }
 }
 ?>
       <div id="main" class="content">
@@ -70,11 +75,7 @@ foreach($talks as $talk){
             	<td><?php echo escapeHTML($talker->screen_name); ?></td>
             	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
             	<td><?php echo escapeHTML($talker->year()->name); ?></td>
-            	<td>
-            	  <?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '">';} ?>
-            	  <?php echo escapeHTML($talk->title); ?>
-            	  <?php if($isAuthed){echo "</a>";} ?>
-            	</td>
+            	<td><?php echo escapeHTML($talk->title); ?></td>
             </tr>
 <?php
 }

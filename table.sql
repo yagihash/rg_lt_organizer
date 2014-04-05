@@ -66,16 +66,26 @@ CREATE TABLE `tracers` (
 
 
 -- 学年は固定なので直接書く
-INSERT INTO years(name) VALUES ("B1");
-INSERT INTO years(name) VALUES ("B2");
-INSERT INTO years(name) VALUES ("B3");
-INSERT INTO years(name) VALUES ("B4");
-INSERT INTO years(name) VALUES ("M1");
-INSERT INTO years(name) VALUES ("M2");
-INSERT INTO years(name) VALUES ("Faculty");
-INSERT INTO years(name) VALUES ("Other");
+INSERT INTO years(name) VALUES ('B1');
+INSERT INTO years(name) VALUES ('B2');
+INSERT INTO years(name) VALUES ('B3');
+INSERT INTO years(name) VALUES ('B4');
+INSERT INTO years(name) VALUES ('M1');
+INSERT INTO years(name) VALUES ('M2');
+INSERT INTO years(name) VALUES ('Faculty');
+INSERT INTO years(name) VALUES ('Other');
 
+-- WEEKも固定っぽいので書く
+INSERT INTO lt_weeks(week,date) VALUES(3,'2014-04-24');
+INSERT INTO lt_weeks(week,date) VALUES(7,'2014-05-22');
+INSERT INTO lt_weeks(week,date) VALUES(9,'2014-06-12');
 
 -- テスト用ユーザ
 INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (1, 'test', 'I am a test account', 2, NULL, 5);
 INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (2, 'yagihash', 'yagihash', 2, NULL, 5);
+
+-- テスト用kg
+INSERT INTO kgs(name) VALUES ('ISC');
+INSERT INTO kgs(name) VALUES ('CPSF');
+
+
