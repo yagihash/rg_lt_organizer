@@ -4,7 +4,7 @@ class User extends Model{
   public static $_table = 'users';
 
   public function talks (){
-    return $this->has_many('Talk','talk_id')->find_many();
+    return $this->has_many('Talk','user_id')->find_many();
   }
 
   public function kg(){
