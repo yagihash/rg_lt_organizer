@@ -70,7 +70,11 @@ foreach($talks as $talk){
             	<td><?php echo escapeHTML($talker->screen_name); ?></td>
             	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
             	<td><?php echo escapeHTML($talker->year()->name); ?></td>
-            	<td><?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '">';} ?>sample_title_1<?php if($isAuthed){echo "</a>";} ?></td>
+            	<td>
+            	  <?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '">';} ?>
+            	  <?php echo escapeHTML($talk->title); ?>
+            	  <?php if($isAuthed){echo "</a>";} ?>
+            	</td>
             </tr>
 <?php
 }
