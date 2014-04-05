@@ -19,6 +19,7 @@ CREATE TABLE `talks` (
        `title` VARCHAR(500),
        `slide` VARCHAR(500), -- スライドのURL
       `lt_week_id` INT(3),
+      `order` INT(3), -- 発表順
     `timeadded` TIMESTAMP, -- 自動でタイムスタンプ追加
   FOREIGN KEY (`user_id`)
     REFERENCES users(`id`),
@@ -77,4 +78,4 @@ INSERT INTO years(name) VALUES ("Other");
 
 -- テスト用ユーザ
 INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (1, 'test', 'I am a test account', 2, NULL, 5);
-INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (1, 'yagihash', 'yagihash', 2, NULL, 5);
+INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (2, 'yagihash', 'yagihash', 2, NULL, 5);
