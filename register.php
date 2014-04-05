@@ -33,7 +33,7 @@ if($isAuthed) {
     // 整合性チェック
     $kg = KG::find_one($kg_id);
     $year = Year::find_one($year_id);
-    $week = LtWeek::find_one($week_id);
+    $week = LtWeek::where_raw("date > CURDATE()")->find_one($week_id);
 
     // TODO: PDFかどうかをチェックする
     $filename = sha1($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
@@ -88,7 +88,7 @@ if($isAuthed) {
           <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
           <label><span>Date:</span><select name="date" required>
 <?php
-  $lt_weeks = LtWeek::order_by_asc("week")->find_many();
+  $lt_weeks = LtWeek::where_raw("date >= CURDATE()")->order_by_asc("week")->find_many();
   foreach($lt_weeks as $lt_week){
     echo "              <option value=\"".escapeHTML($lt_week->id)."\">第".escapeHTML($lt_week->week)."回目(".escapeHTML($lt_week->date).")</option>";
   }
