@@ -6,6 +6,7 @@ ini_set("session.cookie_httponly", 1);
 
 date_default_timezone_set('Asia/Tokyo');
 
+require_once (__DIR__ . "/lib/passwordhash.php");
 $utils = glob(__DIR__ . "/utils/*.php");
 foreach ($utils as $file_path)
   require_once ($file_path);

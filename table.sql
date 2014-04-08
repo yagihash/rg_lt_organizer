@@ -1,14 +1,15 @@
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
            `id` BIGINT(10)  NOT NULL AUTO_INCREMENT,
-   `ldapunique` BIGINT(10)  NOT NULL UNIQUE,
    `login_name` VARCHAR(12) NOT NULL UNIQUE,
   `screen_name` VARCHAR(30) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
         `kg_id` INT(3) NOT NULL,
     `biography` TEXT, 
       `year_id` INT(3) NOT NULL,
+    `mail_auth` INT(1),
+    `mail_hash` VARCHAR(500),
     `timeadded` TIMESTAMP, -- 自動でタイムスタンプ追加
-
   PRIMARY KEY (`id`)
 );
 
@@ -81,8 +82,8 @@ INSERT INTO lt_weeks(week,date) VALUES(7,'2014-05-22');
 INSERT INTO lt_weeks(week,date) VALUES(9,'2014-06-12');
 
 -- テスト用ユーザ
-INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (1, 'test', 'I am a test account', 2, NULL, 5);
-INSERT INTO `users` (`ldapunique`, `login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES (2, 'yagihash', 'yagihash', 2, NULL, 5);
+INSERT INTO `users` (`login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES ('test', 'I am a test account', 2, NULL, 5);
+INSERT INTO `users` (`login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES ('yagihash', 'yagihash', 2, NULL, 5);
 
 -- テスト用kg
 INSERT INTO kgs(name) VALUES ('ISC');
