@@ -32,7 +32,7 @@ foreach ($headers as $key => $value)
         <form class="controll">
           <label>名前を入力して送信
             <br />
-            <input type="text" id="login_name" placeholder="name" maxlength="10" size="10" autofocus required />
+            <input type="text" id="login_name" placeholder="name" maxlength="30" size="10" autofocus required />
           </label>
         </form>
       </div>
