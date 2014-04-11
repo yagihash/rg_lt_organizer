@@ -3,12 +3,12 @@
 class Authenticator {
   const LDAP_SERVER = "ldap1.sfc.wide.ad.jp";
   const LDAP_PORT = 389;
-
+  const DEBUG_FLAG = true;
   public function passwordAuth($login_name, $password) {
     if (true) {
-      return dbAuth($login_name, $password);
+      return $this -> dbAuth($login_name, $password);
     } else {
-      return ldapAuth($login_name, $password);
+      return $this -> ldapAuth($login_name, $password);
     }
   }
 
@@ -45,6 +45,9 @@ class Authenticator {
 
   public function dbAuth($login_name, $password) {
     $user = User::where('login_name', $login_name) -> find_one();
+    if(DEBUG_FLAG){
+      return User::where('login_name', $login_name) -> find_one();
+    }
     if ($user === false) {
       return false;
     }
