@@ -32,7 +32,7 @@ if($isAuthed){
         $week_id = postParamValidate("date");
         $filename = sha1($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
         $filepath =  "slides/" . $filename;
-        $week = LtWeek::where_raw("date > CURDATE()")->find_one($week_id);
+        $week = LtWeek::where_raw("date > ?",array(date('Y-m-d H:i:s')))->find_one($week_id);
         if($title !== false && $week !== false && is_uploaded_file($_FILES["slide"]["tmp_name"])){
           $talk->lt_week_id = $week_id;
           $talk->title = $title;
@@ -58,7 +58,7 @@ if($isAuthed){
         <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
         <label><span>Date:</span><select name="date" required>
 <?php
-        $lt_weeks = LtWeek::where_raw("date >= CURDATE()")->order_by_asc("week")->find_many();
+        $lt_weeks = LtWeek::where_raw("date >= ?",array(date('Y-m-d H:i:s')))->order_by_asc("week")->find_many();
         foreach($lt_weeks as $lt_week){
           echo "            <option value=\"".escapeHTML($lt_week->id). (($lt_week->id == $talk->week_id)?" selected":"") . "\">第".escapeHTML($lt_week->week)."回目(".escapeHTML($lt_week->date).")</option>\n";
         }

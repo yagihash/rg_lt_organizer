@@ -18,7 +18,7 @@ require_once(__DIR__ . "/top_bar.php");
 <?php
 require_once(__DIR__ . "/page_header.php");
 //過去のデータを取ってくるRAW_SQL
-$lt_weeks = LtWeek::raw_query('SELECT * FROM lt_weeks WHERE date < CURDATE() ORDER BY week')->find_many();
+$lt_weeks = LtWeek::getPasts();
 ?>
       <div id="main" class="content"><?php
 foreach($lt_weeks as $lt_week){

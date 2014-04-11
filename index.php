@@ -19,13 +19,13 @@ require_once(__DIR__ . "/top_bar.php");
 require_once(__DIR__ . "/page_header.php");
 
 //次回のLTの予定を取ってくるRAW_SQL
-$lt_week = LtWeek::raw_query('SELECT * FROM lt_weeks WHERE date >= CURDATE() ORDER BY abs(cast(CURDATE() as SIGNED) - cast(date as SIGNED)) LIMIT 1')->find_one();
+$lt_week = LtWeek::getNext();
 $talks = array();
 if($lt_week !== false){
   $talks = $lt_week->talks();
 } else {
   //一番近い日付のデータを取ってくるRAW_SQL
-  $lt_week = LtWeek::raw_query('SELECT * FROM lt_weeks ORDER BY abs(cast(CURDATE() as SIGNED) - cast(date as SIGNED)) LIMIT 1')->find_one();
+  $lt_week = LtWeek::getRecent();
   if($lt_week !== false){
     $talks = $lt_week->talks();
   } else {

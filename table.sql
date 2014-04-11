@@ -80,8 +80,8 @@ INSERT INTO lt_weeks(week,date) VALUES(7,'2014-05-22');
 INSERT INTO lt_weeks(week,date) VALUES(9,'2014-06-12');
 
 -- テスト用ユーザ
-INSERT INTO `users` (`login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES ('test', 'I am a test account', 2, NULL, 5);
-INSERT INTO `users` (`login_name`, `screen_name`, `kg_id`, `biography`, `year_id`) VALUES ('yagihash', 'yagihash', 2, NULL, 5);
+INSERT INTO `users` (`login_name`, `screen_name`, `password`, `kg_id`, `biography`, `year_id`) VALUES ('test', 'I am a test account', '', 2, NULL, 5);
+INSERT INTO `users` (`login_name`, `screen_name`, `password`, `kg_id`, `biography`, `year_id`) VALUES ('yagihash', 'yagihash', '', 2, NULL, 5);
 
 -- テスト用kg
 INSERT INTO kgs(name) VALUES ('ISC');
