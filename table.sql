@@ -1,4 +1,10 @@
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `talks`;
+DROP TABLE IF EXISTS `lt_weeks`;
+DROP TABLE IF EXISTS `kgs`;
+DROP TABLE IF EXISTS `years`;
+DROP TABLE IF EXISTS `tracers`;
+
 CREATE TABLE `users` (
            `id` BIGINT(10)  NOT NULL AUTO_INCREMENT,
    `login_name` VARCHAR(12) NOT NULL UNIQUE,
@@ -13,7 +19,13 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `talks`;
+CREATE TABLE `lt_weeks` ( -- LTを実施する週、日付を設定。管理メニューから編集。
+           `id` INT(3) NOT NULL AUTO_INCREMENT,
+         `week` INT(2), -- 何週目
+         `date` DATE, -- 日付
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE `talks` (
            `id` BIGINT(10) NOT NULL AUTO_INCREMENT,
       `user_id` BIGINT(10) NOT NULL,
@@ -29,25 +41,12 @@ CREATE TABLE `talks` (
   PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `lt_weeks`;
-CREATE TABLE `lt_weeks` ( -- LTを実施する週、日付を設定。管理メニューから編集。
-           `id` INT(3) NOT NULL AUTO_INCREMENT,
-         `week` INT(2), -- 何週目
-         `date` DATE, -- 日付
-
-  PRIMARY KEY (`id`)
-
-);
-
-DROP TABLE IF EXISTS `kgs`;
 CREATE TABLE `kgs` (
            `id` INT(3) NOT NULL AUTO_INCREMENT,
          `name` VARCHAR(20) NOT NULL UNIQUE,
-  
   PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `years`;
 CREATE TABLE `years` (
            `id` INT(3) NOT NULL AUTO_INCREMENT,
          `name` VARCHAR(20) NOT NULL UNIQUE,
@@ -55,7 +54,6 @@ CREATE TABLE `years` (
 );
 
 -- 攻撃検知用のテーブル
-DROP TABLE IF EXISTS `tracers`;
 CREATE TABLE `tracers` (
            `id` INT(3) NOT NULL AUTO_INCREMENT,
          `user_id` VARCHAR(20) NOT NULL UNIQUE,
@@ -88,5 +86,3 @@ INSERT INTO `users` (`login_name`, `screen_name`, `kg_id`, `biography`, `year_id
 -- テスト用kg
 INSERT INTO kgs(name) VALUES ('ISC');
 INSERT INTO kgs(name) VALUES ('CPSF');
-
-
