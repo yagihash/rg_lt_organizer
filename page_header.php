@@ -15,6 +15,16 @@
               <li>
                 <a href="./archive.php">Archive</a>
               </li>
+<?php
+if($current_user !== false){
+?>
+              <li>
+                <a href="./mypage.php">Mypage</a>
+              </li>
+<?php
+}
+?>
+
               <li>
                 <a href="./timer/">Timer</a>
               </li>
