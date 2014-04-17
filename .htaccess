@@ -1,0 +1,3 @@
+<Files ".rg.sqlite">
+  deny from all 
+</Files>

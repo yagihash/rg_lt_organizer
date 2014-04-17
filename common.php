@@ -12,7 +12,7 @@ foreach ($utils as $file_path)
   require_once ($file_path);
 
 require_once (__DIR__ . "/lib/j4mie/idiorm.php");
-ORM::configure("sqlite:/etc/sqlite/rg.sqlite");
+ORM::configure("sqlite:./.rg.sqlite");
 require_once (__DIR__ . "/lib/j4mie/paris.php");
 
 spl_autoload_register(function ($class) {

@@ -3,7 +3,7 @@
 class Authenticator {
   const LDAP_SERVER = "ldap1.sfc.wide.ad.jp";
   const LDAP_PORT = 389;
-  const DEBUG_FLAG = true;
+  const DEBUG_FLAG = false;
   public function passwordAuth($login_name, $password) {
     if (true) {
       return $this -> dbAuth($login_name, $password);
