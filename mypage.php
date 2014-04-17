@@ -38,7 +38,7 @@ if($isAuthed){
             	<td><?php echo escapeHTML($talk->id); ?></td>
             	<td><?php echo escapeHTML($talk->title); ?></td>
             	<td><?php echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '" target="_blank">'; ?><?php echo escapeHTML($talk->title); ?><?php echo "</a>"; ?></td>
-              <td><a href="edit.php?id=<?php echo escapeHTML($talk->id); ?>">Edit</a><a href="delete.php?id=<?php echo escapeHTML($talk->id); ?>">Delete</a></td>
+              <td><a href="edit.php?id=<?php echo escapeHTML($talk->id); ?>">Edit</a><span> / </span><a href="delete.php?id=<?php echo escapeHTML($talk->id); ?>">Delete</a></td>
             </tr>
           </tbody>
 <?php
