@@ -1,11 +1,10 @@
 <?php
 
 class Authenticator {
-  const LDAP_SERVER = "ldap1.sfc.wide.ad.jp";
-  const LDAP_PORT = 389;
+  const LDAP_SERVER = "ldaps://ldap1.sfc.wide.ad.jp/";
   const DEBUG_FLAG = false;
   public function passwordAuth($login_name, $password) {
-    if (true) {
+    if (false) {
       return $this -> dbAuth($login_name, $password);
     } else {
       return $this -> ldapAuth($login_name, $password);
@@ -30,9 +29,12 @@ class Authenticator {
   }
 
   public function ldap_pass($login_name, $password) {
-    $ldapconn = ldap_connect(self::LDAP_SERVER, self::LDAP_PORT);
+    $ldapconn = ldap_connect(self::LDAP_SERVER);
     if ($ldapconn) {
-      $ldapbind = ldap_bind($ldapconn, $login_name, $password);
+      $ldapbind = false;
+      if(preg_match("\A\w+\z",$login_name)){
+        $ldapbind = ldap_bind($ldapconn, "uid={$login_name},ou=People,dc=sfc,dc=wide,dc=ad,dc=jp", $password);
+      }
       if ($ldapbind) {
         return true;
       } else {
