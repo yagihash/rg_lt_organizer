@@ -47,7 +47,10 @@ require_once(__DIR__ . "/top_bar.php");
 require_once(__DIR__ . "/page_header.php");
 ?>
       <div id="main" class="content">
-        <h1>ログインエラー</h1>
+        <h2>Error</h2>
+        <p>
+          Login error.
+        </p>
       </div>
     </div>
   </body>
