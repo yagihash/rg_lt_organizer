@@ -141,7 +141,7 @@ require_once(__DIR__ . "/page_header.php");
 <?php
   $kgs = KG::find_many();
   foreach($kgs as $kg){
-    echo "              <option value=\"".escapeHTML($kg->id)."\">".escapeHTML($kg->name)."</option>";
+    echo "              <option value=\"".escapeHTML($kg->id)."\">".escapeHTML($kg->name)."</option>\n";
   }
 ?>
           </select></label>
