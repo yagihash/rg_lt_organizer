@@ -34,9 +34,11 @@ require_once (__DIR__ . "/head.php");
 require_once(__DIR__ . "/top_bar.php");
 ?>
     <div id="wrap">
-      <div id="main" class="content">
 <?php
 require_once(__DIR__ . "/page_header.php");
+?>
+      <div id="main" class="content">
+<?php
   $token = postParamValidate("token");
   $saved = false;
   if(checkToken($token)){
@@ -101,7 +103,7 @@ require_once(__DIR__ . "/page_header.php");
         echo "        <p>".escapeHTML($err)."</p>\n";
       }
 ?>
-        <form method="POST">
+        <form id="signup" method="POST">
           <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
           <label><span>Login name:</span><input type="text" name="login_name" placeholder="Ex.) nakajima" value="<?php echo escapeHTML($login_name); ?>" maxlength="8" /></label>
           <label><span>Password:</span><input type="password" name="password"/></label>
@@ -110,7 +112,7 @@ require_once(__DIR__ . "/page_header.php");
 <?php
   $kgs = KG::find_many();
   foreach($kgs as $kg){
-    echo "              <option value=\"".escapeHTML($kg->id)."\"".($kg_id == $kg->id?" selected":"").">".escapeHTML($kg->name)."</option>";
+    echo "              <option value=\"".escapeHTML($kg->id)."\"".($kg_id == $kg->id?" selected":"").">".escapeHTML($kg->name)."</option>\n";
   }
 ?>
           </select></label>
@@ -118,7 +120,7 @@ require_once(__DIR__ . "/page_header.php");
 <?php
   $years = Year::order_by_asc("id")->find_many();
   foreach($years as $year){
-    echo "              <option value=\"".escapeHTML($year->id)."\"".($year->id == $year_id?" selected":"").">".escapeHTML($year->name)."</option>";
+    echo "              <option value=\"".escapeHTML($year->id)."\"".($year->id == $year_id?" selected":"").">\n".escapeHTML($year->name)."</option>\n";
   }
 ?>
           </select></label>
@@ -130,7 +132,7 @@ require_once(__DIR__ . "/page_header.php");
 ?>
         <h2>LT System登録フォーム</h2>
         <p>{Login name}@sfc.wide.ad.jpに認証用メールを送ります。</p>
-        <form method="POST">
+        <form id="signup" method="POST">
           <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
           <label><span>Login name:</span><input type="text" name="login_name" placeholder="Ex.) nakajima" maxlength="8" /></label>
           <label><span>Password:</span><input type="password" name="password"/></label>

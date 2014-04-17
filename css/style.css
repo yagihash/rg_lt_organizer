@@ -232,3 +232,18 @@ form#register input[type=submit] {
   margin-left: 60px;
   margin-top: 20px;
 }
+
+form#signup {
+  margin-top: 20px;
+}
+
+form#signup label {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+form#signup label span {
+  display: inline-block;
+  width: 100px;
+}
