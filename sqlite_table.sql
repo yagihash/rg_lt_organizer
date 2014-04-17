@@ -20,8 +20,6 @@ CREATE TABLE 'tracers' ( 'id' INTEGER PRIMARY KEY AUTOINCREMENT, 'user_id' VARCH
 DROP TABLE 'users';
 CREATE TABLE 'users' ( 'id' INTEGER PRIMARY KEY, 'login_name' VARCHAR(12) NOT NULL, 'screen_name' VARCHAR(30) NOT NULL, 'password' VARCHAR(255) NOT NULL DEFAULT "", 'kg_id' INT(3) NOT NULL, 'biography' TEXT, 'year_id' INT(3) NOT NULL, 'mail_auth' INT(1), 'mail_hash' VARCHAR(500), 'timeadded' TIMESTAMP );
 
-INSERT INTO 'users' VALUES ('1', 'test', 'I am a test account', '', '2', NULL, '5', NULL, NULL, NULL);
-INSERT INTO 'users' VALUES ('2', 'yagihash', 'yagihash', '', '2', NULL, '5', NULL, NULL, NULL);
 DROP TABLE 'years';
 CREATE TABLE 'years' ( 'id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' VARCHAR(20) NOT NULL UNIQUE );
 
