@@ -32,7 +32,7 @@ class Authenticator {
     $ldapconn = ldap_connect(self::LDAP_SERVER);
     if ($ldapconn) {
       $ldapbind = false;
-      if(preg_match("\A\w+\z",$login_name)){
+      if(preg_match("/\A[a-zA-Z0-9_]+\z/",$login_name)){
         $ldapbind = ldap_bind($ldapconn, "uid={$login_name},ou=People,dc=sfc,dc=wide,dc=ad,dc=jp", $password);
       }
       if ($ldapbind) {
