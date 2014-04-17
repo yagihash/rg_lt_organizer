@@ -34,8 +34,8 @@ if($isAuthed){
         $filepath =  "slides/" . $filename;
         $week = LtWeek::where_raw("date > ?",array(date('Y-m-d H:i:s')))->find_one($week_id);
         if($title !== false && $week !== false && is_uploaded_file($_FILES["slide"]["tmp_name"])){
-          $talk->lt_week_id = $week_id;
-          $talk->title = $title;
+          # $talk->lt_week_id = $week_id;
+          # $talk->title = $title;
           if (move_uploaded_file($_FILES["slide"]["tmp_name"], $filepath)) {
             chmod($filepath, 0644);
           } else {
@@ -43,13 +43,15 @@ if($isAuthed){
             exit();
           }
           $talk->slide = $filename;
-          $talk->save();
-          $saved = true;
         }
+        $talk->lt_week_id = $week_id;
+        $talk->title = $title;
+        $talk->save();
+        $saved = true;
       }
       if($saved){
 ?>
-      <h1>Saved</h1>
+      <h2>Saved</h2>
 <?php
       }else{
       //OK
