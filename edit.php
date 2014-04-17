@@ -65,7 +65,7 @@ if($isAuthed){
 ?>
         </select></label>
         <label><span>Title:</span><input type="text" name="title" value="<?php echo escapeHTML($talk->title); ?>" maxlength="100" required /></label>
-        <label><span>Slides:</span><input type="file" name="slide" accept="application/pdf" required /></label>
+        <label><span>Slides:</span><input type="file" name="slide" accept="application/pdf" /></label>
         <label class="check">スライドを非公開に設定する<input type="checkbox" name="publish_slide" /></label>
         <input type="submit" value="Submit" />
       </form>

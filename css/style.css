@@ -247,3 +247,10 @@ form#signup label span {
   display: inline-block;
   width: 100px;
 }
+
+div#main.mypage table thead tr th, div#main.mypage table tbody tr td {
+  border-collapse: collapse;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
