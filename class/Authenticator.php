@@ -30,8 +30,8 @@ class Authenticator {
 
   public function ldap_pass($login_name, $password) {
     $ldapconn = ldap_connect(self::LDAP_SERVER);
-    ldap_set_option($lc, LDAP_OPT_PROTOCOL_VERSION, 3);
-    ldap_set_option($lc, LDAP_OPT_REFERRALS, 0);
+    ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+    ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
     if ($ldapconn) {
       $ldapbind = false;
       if(preg_match("/\A[a-zA-Z0-9_]+\z/",$login_name)){
