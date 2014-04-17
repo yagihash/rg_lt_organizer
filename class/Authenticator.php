@@ -67,6 +67,8 @@ class Authenticator {
 
     $user -> login_name = $login_name;
     $user -> screen_name = $login_name;
+    $user-> kg_id = 1;
+    $user -> year_id = 1;
     $user -> save();
 
     return $user;
