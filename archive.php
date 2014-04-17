@@ -46,17 +46,19 @@ foreach($lt_weeks as $lt_week){
           <tbody>
 <?php
   $talks = $lt_week->talks();
+  $i=0;
   foreach($talks as $talk){
     $talker = $talk->user();
 ?>
             <tr>
-            	<td><?php echo escapeHTML($talk->id); ?></td>
+            	<td><?php echo escapeHTML(dechex($i)); ?></td>
             	<td><?php echo escapeHTML($talker->screen_name); ?></td>
             	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
             	<td><?php echo escapeHTML($talker->year()->name); ?></td>
             	<td><?php if($isAuthed){echo '<a href="slide.php?f=' . escapeHTML($talk->slide) . '" target="_blank">';} ?><?php echo escapeHTML($talk->title); ?><?php if($isAuthed){echo "</a>";} ?></td>
             </tr>
 <?php
+    ++$i;
   }
 ?>
           </tbody>

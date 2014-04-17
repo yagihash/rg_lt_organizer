@@ -67,17 +67,19 @@ if($lt_week !== false){
           </tfoot>
           <tbody>
 <?php
+$i=0;
 foreach($talks as $talk){
   $talker = $talk->user();
 ?>
             <tr>
-            	<td><?php echo escapeHTML($talk->id); ?></td>
+            	<td><?php echo escapeHTML(dechex($i)); ?></td>
             	<td><?php echo escapeHTML($talker->screen_name); ?></td>
             	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
             	<td><?php echo escapeHTML($talker->year()->name); ?></td>
             	<td><?php echo escapeHTML($talk->title); ?></td>
             </tr>
 <?php
+  ++$i;
 }
 ?>
           </tbody>
