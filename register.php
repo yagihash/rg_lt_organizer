@@ -35,9 +35,22 @@ if($isAuthed) {
     $year = Year::find_one($year_id);
     $week = LtWeek::where_raw("date > ?",array(date('Y-m-d H:i:s')))->find_one($week_id);
 
-    // TODO: PDFかどうかをチェックする
     $filename = sha1($_FILES["slide"]["tmp_name"] . bin2hex(openssl_random_pseudo_bytes(32)) . time()) . ".pdf";
     $filepath =  "slides/" . $filename;
+      // PDFかどうかをチェック
+      // TODO: この部分、未テスト
+      $finfo = new finfo(FILEINFO_MIME_TYPE);
+      $type = $finfo -> file($_FILES["slide"]["tmp_name"]);
+      if (!isset($file['error']) or !is_int($file['error'])) {
+        # throw new Exception("An error occured in file uploading.");
+        unset($_FILES["slide"]["tmp_name"]);
+      } else if (!preg_match("/^application\/pdf/", $type)) {
+        # throw new Exception("Only pdf file can be accepted.");
+        unset($_FILES["slide"]["tmp_name"]);
+      } else if ($file['size'] > 1000000) {
+        # throw new Exception("Uploaded file is too large.");
+        unset($_FILES["slide"]["tmp_name"]);
+      }
     if($title !== false && $week !== false && $kg !== false && $year !== false && is_uploaded_file($_FILES["slide"]["tmp_name"])){
       // ユーザ情報の保存
       $need_save = false;
