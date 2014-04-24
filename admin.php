@@ -11,7 +11,7 @@ if(!$isAdmin){
 
 $token = postParamValidate("token");
 $mode = postParamValidate("mode");
-
+$week_talks = null;
 if(checkToken($token)){
   try {
     if($mode == "kg_add"){
@@ -58,6 +58,25 @@ if(checkToken($token)){
         $lt_week->week = $week;
        $lt_week->save();
       }
+    }else if($mode == "order_choice"){
+      $week_id = postParamValidate("id");
+      $lt_week = LtWeek::find_one($week_id);
+      $week_talks = array();
+      if($lt_week !== false){
+        $week_talks = $lt_week->talks();
+      }
+    }else if($mode == "order_change"){
+      $talk_id = postParamValidate("talk_id");
+      $talk = Talk::find_one($talk_id);
+      $talk->order = postParamValidate("order");
+      $talk->save();
+      
+      $week_id = postParamValidate("week_id");
+      $lt_week = LtWeek::find_one($week_id);
+      $week_talks = array();
+      if($lt_week !== false){
+        $week_talks = $lt_week->talks();
+      }
     }
   } catch(PDOException $e){
     //主にユニーク設定したものが衝突した場合に起こる
@@ -86,6 +105,61 @@ require_once(__DIR__ . "/page_header.php");
 ?>
       <div id="main" class="admin">
         <h2>Admin menu</h2>
+<?php
+if(!is_null($week_talks)){
+?>
+        <table id="presenters">
+          <thead>
+            <tr>
+              <th> </th>
+              <th>Presenter</th>
+              <th>KG</th>
+              <th>Year</th>
+              <th>Title</th>
+              <th>Order</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th> </th>
+              <th>Presenter</th>
+              <th>KG</th>
+              <th>Year</th>
+              <th>Title</th>
+              <th>Order</th>
+            </tr>
+          </tfoot>
+          <tbody>
+<?php
+  $i =0;
+  foreach($week_talks as $talk){
+  $talker = $talk->user();
+?>
+            <tr>
+            	<td><?php echo escapeHTML(dechex($i)); ?></td>
+            	<td><?php echo escapeHTML($talker->screen_name); ?></td>
+            	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
+            	<td><?php echo escapeHTML($talker->year()->name); ?></td>
+            	<td><?php echo escapeHTML($talk->title); ?></td>
+            	<td>
+                  <form action="admin.php" method="POST" class="admin">
+                    <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
+                    <input type="hidden" name="mode" value="order_change" />
+                    <input type="hidden" name="talk_id" value="<?php echo escapeHTML($talk->id); ?>" />
+                    <input type="hidden" name="week_id" value="<?php echo escapeHTML(postParamValidate("id")); ?>" />
+              	    <input type="text" name="order" value="<?php echo escapeHTML($talk->order); ?>" maxlength="3" />
+              	    <input type="submit" value="Change" />
+              	  </form>
+              	</td>
+            </tr>
+<?php
+  $i++;
+  }
+} else {
+
+?>
+          </tbody>
+        </table>
         <h3>KG</h3>
         <div class="admin_form_box">
           <form action="admin.php" method="POST" class="admin">
@@ -168,7 +242,25 @@ foreach($lt_weeks as $lt_week){
             <input type="text" name="date" pattern="^[0-9]{4}-\d{2}-\d{2}$" maxlength="10" placeholder="YYYY-MM-DD" /><!-- Picker -->
             <input type="submit" value="Change Week" />
           </form>
+          <form action="admin.php" method="POST" class="admin">
+            <input type="hidden" name="token" value="<?php echo issueToken(); ?>" />
+            <input type="hidden" name="mode" value="order_choice" />
+            <select name="id" required>
+              <option value="">-----</option>
+<?php
+$lt_weeks = LtWeek::find_many();
+foreach($lt_weeks as $lt_week){
+  echo "              <option value=\"".escapeHTML($lt_week->id)."\">第".escapeHTML($lt_week->week)."回目(".escapeHTML($lt_week->date).")</option>";
+}
+?>
+
+            </select>
+            <input type="submit" value="Order Change" />
+          </form>
         </div>
+<?php
+}
+?>
       </div>
     </div>
   </body>
