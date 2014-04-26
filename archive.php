@@ -51,7 +51,7 @@ foreach($lt_weeks as $lt_week){
     $talker = $talk->user();
 ?>
             <tr>
-            	<td><?php echo escapeHTML(dechex($i)); ?></td>
+            	<td><?php echo escapeHTML(strtoupper(dechex($i))); ?></td>
             	<td><?php echo escapeHTML($talker->screen_name); ?></td>
             	<td><?php echo escapeHTML($talker->kg()->name); ?></td>
             	<td><?php echo escapeHTML($talker->year()->name); ?></td>
