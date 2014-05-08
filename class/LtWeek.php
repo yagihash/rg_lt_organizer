@@ -12,11 +12,11 @@ class LtWeek extends Model{
 //    return self::raw_query('SELECT * FROM lt_weeks ORDER BY abs(cast(CURDATE() as SIGNED) - cast(date as SIGNED)) LIMIT 1')->find_one();
   }
   
-  public function getNext(){
+  public static function getNext(){
     return self::raw_query('SELECT * FROM lt_weeks WHERE date >= ? ORDER BY date LIMIT 1',array(date('Y-m-d H:i:s')))->find_one();
   }
   
-  public function getPasts(){
+  public static function getPasts(){
     return self::raw_query('SELECT * FROM lt_weeks WHERE date < ? ORDER BY week',array(date('Y-m-d H:i:s')))->find_many();
   }
   
